@@ -8,7 +8,7 @@ function App() {
     <GameWindowWrapper>
       <Routes>
         <Route path="/" element={<HomePlaceholder />} />
-        <Route path="/testpage" element={<TestPage />} />
+        <Route path="/testpage" element={<TestPage />} /> {/* comment out this line in final build */}
       </Routes>
     </GameWindowWrapper>
   )

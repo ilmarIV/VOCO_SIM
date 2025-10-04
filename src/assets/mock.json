@@ -1,0 +1,96 @@
+{
+  "intro": "Placeholder intro",
+  "courses": [
+    {
+      "name": "maths",
+      "EKAPs": "5",
+      "description": "Placeholder introduction",
+      "questions": [
+        {
+          "question": "Placeholder question",
+          "answers": ["Placeholder answer 1", "Placeholder answer 2"],
+          "correctAnswerIndex": "1"
+        }
+      ]
+    },
+    {
+      "name": "programming",
+      "EKAPs": "1",
+      "description": "Placeholder introduction",
+      "questions": [
+        {
+          "question": "Placeholder question",
+          "answers": ["Placeholder answer 1", "Placeholder answer 2"],
+          "correctAnswerIndex": "1"
+        }
+      ]
+    },
+    {
+      "name": "english",
+      "EKAPs": "2",
+      "description": "Placeholder introduction",
+      "questions": [
+        {
+          "question": "Placeholder question",
+          "answers": ["Placeholder answer 1", "Placeholder answer 2"],
+          "correctAnswerIndex": "2"
+        }
+      ]
+    },
+    {
+      "name": "databases",
+      "EKAPs": "4",
+      "description": "Placeholder introduction",
+      "questions": [
+        {
+          "question": "Placeholder question",
+          "answers": ["Placeholder answer 1", "Placeholder answer 2"],
+          "correctAnswerIndex": "2"
+        }
+      ]
+    },
+    {
+      "name": "design",
+      "EKAPs": "10",
+      "description": "Placeholder introduction",
+      "questions": [
+        {
+          "question": "Placeholder question",
+          "answers": ["Placeholder answer 1", "Placeholder answer 2"],
+          "correctAnswerIndex": "1"
+        }
+      ]
+    }
+  ],
+  "fields": [
+    {
+      "name": "it person",
+      "courses": [
+        {
+          "name": "maths",
+          "year": "1"
+        },
+        {
+          "name": "programming",
+          "year": "1"
+        },
+        {
+          "name": "english",
+          "year": "1"
+        },
+        {
+          "name": "databases",
+          "year": "2"
+        },
+        {
+          "name": "programming",
+          "year": "2"
+        },
+        {
+          "name": "design",
+          "year": "3"
+        }
+      ]
+    }
+  ]
+}

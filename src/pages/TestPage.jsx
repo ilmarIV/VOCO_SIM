@@ -1,10 +1,10 @@
-import {useCourses } from '../context/CurrentYearsCoursesContext'
+import {useCurrentYearsCourses } from '../context/CurrentYearsCoursesContext'
 import { useGameState } from '../context/GameStateContext';
 
 // testing ground for ilmar(and others)
 function TestPage () {
-    const { completeCourse } = useCourses();
-    const { selectField, finishYear, currentYear } = useGameState();
+    const { completeCourse } = useCurrentYearsCourses();
+    const { selectProgram, finishYear, currentYear } = useGameState();
     
     return (
         <div className='p-4 space-x-4'>
@@ -15,7 +15,7 @@ function TestPage () {
             {/* Button to select IT Person field */}
             <button
                 className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
-                onClick={() => selectField("it person")}
+                onClick={() => selectProgram("it person")}
             >
                 Select IT Person Field
             </button>

@@ -1,4 +1,5 @@
-// modal to display all current years courses, is openned via clicking button on ProgressMenu, has visual distinction between courses that are completed and not
+// modal to display all current years courses, is openned via clicking button on ProgressMenu, 
+// has visual distinction between courses that are completed and not, styled with chatGPT, needs to be styled according to the prototype
 function CurrentYearsCoursesModal ({ courses, onClose }) {
     return (
         <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50">

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useCourses } from '../context/CurrentYearsCoursesContext';
+import { useCurrentYearsCourses } from '../context/CurrentYearsCoursesContext';
 import ProgressBar from './ProgressBar';
 import CurrentYearsCoursesModal from './CurrentYearsCoursesModal';
 import { FaScroll } from "react-icons/fa";
@@ -8,7 +8,7 @@ import { FaScroll } from "react-icons/fa";
 // Menu on top right corner that contains progress bar and button to open current years courses modal
 function ProgressMenu() {
     const [coursesModalIsOpen, setCoursesModalIsOpen] = useState(false);
-    const { courses } = useCourses();
+    const { courses } = useCurrentYearsCourses();
 
     const completedQuestsCount = courses.filter(course => course.completed).length;
     const completedQuestPercentage = courses.length > 0

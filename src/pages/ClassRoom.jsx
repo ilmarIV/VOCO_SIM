@@ -13,16 +13,17 @@ const TeacherDisplay = ({ teacherId, mood }) => (
 	</div>
 );
 
-const ModuleInfo = ({ name, ekap }) => (
-	<div className='absolute top-4 right-4 flex gap-3'>
-		<button className='px-6 py-2 bg-transparent border-2 border-white text-white rounded-full font-medium hover:bg-white hover:text-black transition-colors'>
-			{name || "Õppeaine nimetus nt"}
-		</button>
-		<button className='px-6 py-2 bg-transparent border-2 border-white text-white rounded-full font-medium hover:bg-white hover:text-black transition-colors'>
-			{ekap || "EKAP"} EKAP
-		</button>
-	</div>
-);
+const ModuleInfo = ({ name, ekap }) => {
+	const buttonClass =
+		"px-6 py-2 bg-transparent border-2 border-white text-white rounded-full font-medium hover:bg-white hover:text-black transition-colors";
+
+	return (
+		<div className='absolute top-4 right-4 flex gap-3'>
+			<button className={buttonClass}>{name || "Õppeaine nimetus nt"}</button>
+			<button className={buttonClass}>{ekap || ""} EKAP</button>
+		</div>
+	);
+};
 
 const AnswerButton = ({
 	text,
@@ -55,7 +56,7 @@ const AnswerButton = ({
 };
 
 function ClassRoom({ moduleId }) {
-	moduleId = 9240;
+	moduleId = 9240; // Testimiseks
 
 	const { completeCourse } = useCurrentYearsCourses();
 
@@ -125,7 +126,7 @@ function ClassRoom({ moduleId }) {
 				<TeacherDisplay teacherId={randomTeacher} mood={teacherMood} />
 
 				<div className='flex-1 flex flex-col items-center justify-center space-y-6 max-w-2xl'>
-					<div className='bg-white rounded-3xl p-6 shadow-lg w-full'>
+					<div className='bg-white rounded-3xl rounded-bl-none p-6 shadow-lg w-full'>
 						<p className='text-gray-800 text-lg'>
 							{moduleData?.description || "Kirjeldus"}
 						</p>
@@ -167,7 +168,7 @@ function ClassRoom({ moduleId }) {
 			<TeacherDisplay teacherId={randomTeacher} mood={teacherMood} />
 
 			<div className='flex-1 flex flex-col items-center justify-center space-y-6 max-w-2xl'>
-				<div className='bg-white rounded-3xl p-6 shadow-lg w-full'>
+				<div className='bg-white rounded-3xl rounded-bl-none p-6 shadow-lg w-full'>
 					<p className='text-gray-800 text-lg'>
 						{currentQuestion?.q || "Küsimus"}
 					</p>

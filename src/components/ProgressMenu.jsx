@@ -24,7 +24,7 @@ function ProgressMenu() {
             {/* Button to open courses modal */}
             <button
                 onClick={() => setCoursesModalIsOpen(true)}
-                className="px-3 py-1 rounded bg-blue-600 hover:bg-blue-700 text-white shadow"
+                className="px-3 py-1 rounded bg-green-400 hover:bg-green-600 text-white shadow"
             >
                 <FaScroll />
             </button>

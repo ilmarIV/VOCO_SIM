@@ -10,36 +10,37 @@ export const useCurrentYearsCourses = () => useContext(CurrentYearsCoursesContex
 
 
 export function CurrentYearsCoursesProvider ({ children }) {
-    const { field, currentYear,finishCourse, finishYear } = useGameState();
+    const { program, currentYear, goToRoute, finishYear } = useGameState();
     const [courses, setCourses] = useState([]);
 
 
     const coursesYearRef = useRef(currentYear);
 
 
-    //set courses completed status to true
+    //set courses completed status to true and redirects to floor pan
+    //use this affter successful quiz completion
     const completeCourse = (courseName) => {
         setCourses((prev) =>
             prev.map((c) =>
                 c.name === courseName ? { ...c, completed: true} : c
             )
         );
-        finishCourse();
+        goToRoute("/testpage2"); // should be replaced with floor map route
     };
 
 
-    //load current years courses data, is triggered on field selection and curretYear change
+    //load current years courses data, is triggered on program selection and curretYear change
     useEffect(() => {
-        if (!field) return;
+        if (!program) return;
 
-        const fieldObj = gameData.fields.find((f) => f.name === field);
-        if (!fieldObj) return;
+        const programObj = gameData.fields.find((p) => p.name === program);
+        if (!programObj) return;
 
-        const fieldsCurrentYearsCourses = fieldObj.courses.filter(
+        const programsCurrentYearsCourses = programObj.courses.filter(
             (c) => Number(c.year) === Number(currentYear)
         );
 
-        const detailedCourses = fieldsCurrentYearsCourses.map(c => {
+        const detailedCourses = programsCurrentYearsCourses.map(c => {
             const courseData = gameData.courses.find(cd => cd.name === c.name);
             return {
                 ...courseData,
@@ -50,7 +51,7 @@ export function CurrentYearsCoursesProvider ({ children }) {
         setCourses(detailedCourses)
         coursesYearRef.current = currentYear;
         
-    }, [field, currentYear]);
+    }, [program, currentYear]);
 
 
     // transition to next year when all courses are completed on currentYear, check triggers every time courses array has changes 
@@ -63,7 +64,7 @@ export function CurrentYearsCoursesProvider ({ children }) {
             coursesYearRef.current = null;
         };
 
-    }, [courses,]);
+    }, [courses]);
 
 
     return (

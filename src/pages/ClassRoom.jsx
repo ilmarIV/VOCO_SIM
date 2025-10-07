@@ -2,6 +2,8 @@ import { useState, useMemo, useCallback } from "react";
 import ProgressBar from "../components/ProgressBar";
 import { useCurrentYearsCourses } from "../context/CurrentYearsCoursesContext";
 import ModulesData from "../assets/moodulid-game.json";
+import { FaChevronRight } from "react-icons/fa";
+//import { useLocation } from "react-router-dom";
 
 const TeacherDisplay = ({ teacherId, mood }) => (
 	<div className='flex flex-col justify-end'>
@@ -55,8 +57,11 @@ const AnswerButton = ({
 	);
 };
 
-function ClassRoom({ moduleId }) {
-	moduleId = 9240; // Testimiseks
+function ClassRoom() {
+	//const location = useLocation();
+	//const { moduleId } = location.state || {};
+
+	let moduleId = 9240; // Testimiseks
 
 	const { completeCourse } = useCurrentYearsCourses();
 
@@ -138,20 +143,7 @@ function ClassRoom({ moduleId }) {
 					className='absolute bottom-5 right-10 mb-4 ml-4 px-6 py-3 bg-white font-bold text-black rounded-full hover:bg-gray-400 transition-colors shadow-md cursor-pointer flex items-center gap-2'
 				>
 					Alusta
-					<svg
-						xmlns='http://www.w3.org/2000/svg'
-						className='w-5 h-5'
-						fill='none'
-						viewBox='0 0 24 24'
-						stroke='currentColor'
-					>
-						<path
-							strokeLinecap='round'
-							strokeLinejoin='round'
-							strokeWidth={2}
-							d='M9 5l7 7-7 7'
-						/>
-					</svg>
+					<FaChevronRight />
 				</button>
 			</div>
 		);

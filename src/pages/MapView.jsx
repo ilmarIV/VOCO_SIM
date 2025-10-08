@@ -46,12 +46,17 @@ export default function MapView() {
   }, [remainingTeachers]);
 
   return (
-    <div className="relative w-full h-full">
-      {/* taustakaart; pane õige pildi tee public/ alla */}
+    <div
+      className="relative w-full max-w-5xl mx-auto"
+      // sama suhe kui piltidel (724x623), et protsendid langeksid kokku
+      style={{ aspectRatio: "724 / 623" }}
+    >
+      {/* taustakaart absoluutse kihina; object-contain, et protsendid lähtuks samast lõuendist */}
       <img
-        src="/map.png" // nt public/map.png
-        alt="Korruse plaan"
-        className="w-full h-auto block"
+        src="/map.png"
+        alt="Korruse plaan (mustvalge)"
+        className="absolute inset-0 w-full h-full object-contain pointer-events-none select-none"
+        draggable={false}
       />
 
       {/* õpetajad kaardil */}
@@ -61,9 +66,7 @@ export default function MapView() {
           className="absolute -translate-x-1/2 -translate-y-full"
           style={{ left: pos.left, top: pos.top }}
           onClick={() =>
-            navigate(
-              `/classroom/${TEACHER_TO_MODULE[teacherId]}/${teacherId}`
-            )
+            navigate(`/classroom/${TEACHER_TO_MODULE[teacherId]}/${teacherId}`)
           }
           aria-label={`Open teacher ${teacherId}`}
         >
@@ -91,9 +94,7 @@ export default function MapView() {
       {remainingTeachers.length === 0 && (
         <div className="absolute inset-0 flex items-center justify-center">
           <div className="bg-white/90 rounded-xl px-6 py-4 shadow">
-            <p className="text-lg font-semibold">
-              Kõik õpetajad on läbitud. 🎉
-            </p>
+            <p className="text-lg font-semibold">Kõik õpetajad on läbitud. 🎉</p>
           </div>
         </div>
       )}

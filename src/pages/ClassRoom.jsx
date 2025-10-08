@@ -1,17 +1,28 @@
-import { useState, useMemo, useCallback } from "react";
+import { useState, useCallback } from "react";
 import ProgressBar from "../components/ProgressBar";
 import { useCurrentYearsCourses } from "../context/CurrentYearsCoursesContext";
-import ModulesData from "../assets/moodulid-game.json";
+import { FaChevronRight } from "react-icons/fa";
+import { useLocation } from "react-router-dom";
+import { useGameState } from "../context/GameStateContext";
 
-const TeacherDisplay = ({ teacherId, mood }) => (
-	<div className='flex flex-col justify-end'>
-		<img
-			src={`/teachers/teacher_${teacherId}_${mood}.png`}
-			alt='Teacher'
-			className='h-100 object-contain'
-		/>
-	</div>
-);
+const TeacherDisplay = ({ teacherId, mood }) => {
+	const [isLoaded, setIsLoaded] = useState(false);
+	const imageSrc = `/teachers/teacher_${teacherId}_${mood}.png`;
+
+	return (
+		<div className='flex flex-col justify-end'>
+			<img
+				src={imageSrc}
+				alt='Teacher'
+				className={`h-100 object-contain transition-opacity duration-300 ${
+					isLoaded ? "opacity-100" : "opacity-0"
+				}`}
+				onLoad={() => setIsLoaded(true)}
+				loading='lazy'
+			/>
+		</div>
+	);
+};
 
 const ModuleInfo = ({ name, ekap }) => {
 	const buttonClass =
@@ -55,15 +66,14 @@ const AnswerButton = ({
 	);
 };
 
-function ClassRoom({ moduleId }) {
-	moduleId = 9240; // Testimiseks
+function ClassRoom() {
+	const location = useLocation();
+	const { quizData, moduleData, subjectData } = location.state || {};
+
+	let hasQuiz = !!quizData;
 
 	const { completeCourse } = useCurrentYearsCourses();
-
-	const moduleData = useMemo(
-		() => ModulesData.modules.find((m) => m.id === moduleId),
-		[moduleId]
-	);
+	const { selectProgram } = useGameState();
 
 	const [hasStarted, setHasStarted] = useState(false);
 	const [teacherMood, setTeacherMood] = useState("happy");
@@ -74,11 +84,15 @@ function ClassRoom({ moduleId }) {
 	const [isAnswerWrong, setIsAnswerWrong] = useState(false);
 	const [isTransitioning, setIsTransitioning] = useState(false);
 
-	const totalQuestions = moduleData?.quiz.questions.length || 0;
+	const totalQuestions = quizData?.questions.length || 0;
 	const percentage =
 		totalQuestions === 0 ? 0 : (answeredQuestions / totalQuestions) * 100;
-	const currentQuestion = moduleData?.quiz.questions[currentQuestionIndex];
+	const currentQuestion = quizData?.questions[currentQuestionIndex];
 	const isLastQuestion = currentQuestionIndex === totalQuestions - 1;
+
+	const handleStartWithoutQuiz = (subjectId) => {
+		selectProgram(subjectId);
+	};
 
 	const validateAnswer = useCallback(
 		(userAnswer) => {
@@ -120,7 +134,7 @@ function ClassRoom({ moduleId }) {
 		]
 	);
 
-	if (!hasStarted) {
+	if (!hasStarted || !hasQuiz) {
 		return (
 			<div className='w-full h-full flex justify-between p-8 pb-0 relative'>
 				<TeacherDisplay teacherId={randomTeacher} mood={teacherMood} />
@@ -128,30 +142,26 @@ function ClassRoom({ moduleId }) {
 				<div className='flex-1 flex flex-col items-center justify-center space-y-6 max-w-2xl'>
 					<div className='bg-white rounded-3xl rounded-bl-none p-6 shadow-lg w-full'>
 						<p className='text-gray-800 text-lg'>
-							{moduleData?.description || "Kirjeldus"}
+							{!hasQuiz
+								? subjectData?.description ||
+								  "Sellel erialal ei ole veel kursusi."
+								: moduleData?.description || "Kirjeldus"}
 						</p>
 					</div>
 				</div>
 
 				<button
-					onClick={() => setHasStarted(true)}
+					onClick={() => {
+						if (hasQuiz) {
+							setHasStarted(true);
+						} else {
+							handleStartWithoutQuiz(subjectData?.id);
+						}
+					}}
 					className='absolute bottom-5 right-10 mb-4 ml-4 px-6 py-3 bg-white font-bold text-black rounded-full hover:bg-gray-400 transition-colors shadow-md cursor-pointer flex items-center gap-2'
 				>
 					Alusta
-					<svg
-						xmlns='http://www.w3.org/2000/svg'
-						className='w-5 h-5'
-						fill='none'
-						viewBox='0 0 24 24'
-						stroke='currentColor'
-					>
-						<path
-							strokeLinecap='round'
-							strokeLinejoin='round'
-							strokeWidth={2}
-							d='M9 5l7 7-7 7'
-						/>
-					</svg>
+					<FaChevronRight />
 				</button>
 			</div>
 		);

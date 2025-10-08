@@ -1,0 +1,13 @@
+{
+	"VS24": {
+		"name": "Veebiarendus",
+		"years": 2,
+		"description": "Õpid, kuidas luua ja hallata veebilehti ning veebirakendusi, kasutades HTML-i, CSS-i ja JavaScripti."
+	},
+
+	"UX24": {
+		"name": "UI/UX",
+		"years": 2,
+		"description": "Õpid, kuidas luua kasutajasõbralikke liideseid ja parandada kasutajakogemust."
+	}
+}

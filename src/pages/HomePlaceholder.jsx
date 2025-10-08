@@ -19,6 +19,7 @@ function HomePlaceholder() {
 	const [subjects] = useState(() => {
 		return Object.entries(subjectData).map(([id, data]) => ({
 			id,
+			isCompleted: localStorage.getItem(`${id}_completed`) === "true",
 			...data,
 		}));
 	});
@@ -38,7 +39,8 @@ function HomePlaceholder() {
 					{subjects.map((subject) => (
 						<button
 							key={subject.id}
-							className='bg-white hover:bg-gray-100 p-6 rounded-xl shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-2xl text-left group cursor-pointer w-full'
+							disabled={subject.isCompleted}
+							className='bg-white hover:bg-gray-100 p-6 rounded-xl shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-2xl text-left group cursor-pointer w-full disabled:opacity-50 disabled:cursor-not-allowed'
 							onClick={() =>
 								handleSubjectClick(subject.id, subject.description)
 							}

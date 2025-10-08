@@ -138,14 +138,24 @@ function ClassRoom() {
     ]
   );
 
-  if (!hasStarted) {
-    return (
-      <div className='w-full h-full flex justify-between p-8 pb-0 relative'>
+if (!hasStarted) {
+  return (
+    <div className="w-full h-full relative">
+      {/* BACKGROUND */}
+      <img
+        src="/classroom_bg.png"
+        alt=""
+        aria-hidden="true"
+        className="absolute inset-0 w-full h-full object-cover z-0 select-none pointer-events-none"
+      />
+
+      {/* FOREGROUND */}
+      <div className="relative z-10 w-full h-full flex justify-between p-8 pb-0">
         <TeacherDisplay teacherId={teacherId} mood={teacherMood} />
 
-        <div className='flex-1 flex flex-col items-center justify-center space-y-6 max-w-2xl'>
-          <div className='bg-white rounded-3xl rounded-bl-none p-6 shadow-lg w-full'>
-            <p className='text-gray-800 text-lg'>
+        <div className="flex-1 flex flex-col items-center justify-center space-y-6 max-w-2xl">
+          <div className="bg-white rounded-3xl rounded-bl-none p-6 shadow-lg w-full">
+            <p className="text-gray-800 text-lg">
               {moduleData?.description || "Kirjeldus"}
             </p>
           </div>
@@ -153,46 +163,46 @@ function ClassRoom() {
 
         <button
           onClick={() => setHasStarted(true)}
-          className='absolute bottom-5 right-10 mb-4 ml-4 px-6 py-3 bg-white font-bold text-black rounded-full hover:bg-gray-400 transition-colors shadow-md cursor-pointer flex items-center gap-2'
+          className="absolute bottom-5 right-10 mb-4 ml-4 px-6 py-3 bg-white font-bold text-black rounded-full hover:bg-gray-400 transition-colors shadow-md cursor-pointer flex items-center gap-2"
         >
           Alusta
-          <svg
-            xmlns='http://www.w3.org/2000/svg'
-            className='w-5 h-5'
-            fill='none'
-            viewBox='0 0 24 24'
-            stroke='currentColor'
-          >
-            <path
-              strokeLinecap='round'
-              strokeLinejoin='round'
-              strokeWidth={2}
-              d='M9 5l7 7-7 7'
-            />
+          <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
           </svg>
         </button>
       </div>
-    );
-  }
+    </div>
+  );
+}
 
-  return (
-    <div className='w-full h-full flex justify-between p-8 pb-0 relative'>
+return (
+  <div className="w-full h-full relative">
+    {/* BACKGROUND */}
+    <img
+      src="/classroom_bg.png"
+      alt=""
+      aria-hidden="true"
+      className="absolute inset-0 w-full h-full object-cover z-0 select-none pointer-events-none"
+    />
+
+    {/* FOREGROUND */}
+    <div className="relative z-10 w-full h-full flex justify-between p-8 pb-0">
       <ModuleInfo name={moduleData?.name} ekap={moduleData?.ekap} />
 
-      <div className='flex justify-center flex-col'>
+      <div className="flex justify-center flex-col">
         <ProgressBar percentage={percentage} huge={true} />
       </div>
 
       <TeacherDisplay teacherId={teacherId} mood={teacherMood} />
 
-      <div className='flex-1 flex flex-col items-center justify-center space-y-6 max-w-2xl'>
-        <div className='bg-white rounded-3xl rounded-bl-none p-6 shadow-lg w-full'>
-          <p className='text-gray-800 text-lg'>
+      <div className="flex-1 flex flex-col items-center justify-center space-y-6 max-w-2xl">
+        <div className="bg-white rounded-3xl rounded-bl-none p-6 shadow-lg w-full">
+          <p className="text-gray-800 text-lg">
             {currentQuestion?.q || "Küsimus"}
           </p>
         </div>
 
-        <div className='grid grid-cols-2 gap-4 w-full'>
+        <div className="grid grid-cols-2 gap-4 w-full">
           {currentQuestion?.options.map((questionText, index) => (
             <AnswerButton
               key={index}
@@ -207,7 +217,8 @@ function ClassRoom() {
         </div>
       </div>
     </div>
-  );
+  </div>
+);
 }
 
 export default ClassRoom;

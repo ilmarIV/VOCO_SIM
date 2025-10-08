@@ -1,15 +1,14 @@
 export const POSSIBLE_POSITIONS = [
-  { left: "33%",  top: "22%" },
-  { left: "7%", top: "9%" },
-  { left: "7%", top: "37%" },
-  { left: "7%", top: "87%" },
-  { left: "37%", top: "82%" },
+  { left: "35%",  top: "25%" },
+  { left: "15%", top: "15%" },
+  { left: "15%", top: "42%" },
+  { left: "15%", top: "90%" },
+  { left: "37%", top: "87%" },
   { left: "66%", top: "85%" },
-  { left: "93%", top: "89%" },
-  { left: "93%", top: "36%" },
-  { left: "93%", top: "12%" },
-  { left: "72%", top: "23%" },
-  // ...
+  { left: "86%", top: "89%" },
+  { left: "86%", top: "36%" },
+  { left: "86%", top: "17%" },
+  { left: "68%", top: "26%" },
 ];
 
 export const TEACHER_TO_MODULE = {

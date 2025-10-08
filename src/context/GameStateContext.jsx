@@ -29,9 +29,8 @@ export const GameStateProvider = ({ children }) => {
 		setCurrentYear((prev) => prev + 1);
 
 		if (currentYear >= amountYears) {
-			//game finished, return to start
-
 			localStorage.setItem(`${program}_completed`, "true");
+			localStorage.setItem("show_outro", "true");
 
 			setProgram(null);
 			setCurrentYear(1);

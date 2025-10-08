@@ -21,13 +21,23 @@ const CLASSROOM_LOCATIONS = [
 ];
 
 const getShuffledLocations = () => {
-	const stored = localStorage.getItem("classroom_locations");
-	if (stored) {
-		return JSON.parse(stored);
+	try {
+		const stored = localStorage.getItem("classroom_locations");
+		if (stored) {
+			return JSON.parse(stored);
+		}
+	} catch (error) {
+		console.warn("Failed to load classroom locations:", error);
 	}
 
 	const shuffled = [...CLASSROOM_LOCATIONS].sort(() => Math.random() - 0.5);
-	localStorage.setItem("classroom_locations", JSON.stringify(shuffled));
+
+	try {
+		localStorage.setItem("classroom_locations", JSON.stringify(shuffled));
+	} catch (error) {
+		console.warn("Failed to save classroom locations:", error);
+	}
+
 	return shuffled;
 };
 
@@ -38,18 +48,27 @@ function FloorMap() {
 
 	const classrooms = useMemo(() => {
 		const selectedLocations = shuffledLocations.slice(0, courses.length);
-		return courses.map((course, index) => ({
-			id: course.name || `classroom_${index + 1}`,
-			moduleData: {
-				name: course.name,
-				ekap: course.ekap,
-				description: course.description,
-			},
-			quiz: course.quiz || null,
-			area: selectedLocations[index],
-			isCompleted: course.isCompleted || false,
-		}));
-	}, [courses, shuffledLocations]);
+		return courses
+			.map((course, index) => {
+				const area = selectedLocations[index];
+				if (!area) {
+					console.warn(`No location available for course: ${course.name}`);
+					return null;
+				}
+				return {
+					id: course.name || `classroom_${index + 1}`,
+					moduleData: {
+						name: course.name,
+						ekap: course.ekap,
+						description: course.description,
+					},
+					quiz: course.quiz || null,
+					area,
+					isCompleted: course.isCompleted || false,
+				};
+			})
+			.filter(Boolean); // Remove any null entries
+	}, [courses, shuffledLocations]); // shuffledLocations is stable but ESLint requires it
 
 	return (
 		<div className='relative w-full h-full'>

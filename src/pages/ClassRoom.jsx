@@ -4,15 +4,25 @@ import { useCurrentYearsCourses } from "../context/CurrentYearsCoursesContext";
 import { FaChevronRight } from "react-icons/fa";
 import { useLocation } from "react-router-dom";
 import { useGameState } from "../context/GameStateContext";
-const TeacherDisplay = ({ teacherId, mood }) => (
-	<div className='flex flex-col justify-end'>
-		<img
-			src={`/teachers/teacher_${teacherId}_${mood}.png`}
-			alt='Teacher'
-			className='h-100 object-contain'
-		/>
-	</div>
-);
+
+const TeacherDisplay = ({ teacherId, mood }) => {
+	const [isLoaded, setIsLoaded] = useState(false);
+	const imageSrc = `/teachers/teacher_${teacherId}_${mood}.png`;
+
+	return (
+		<div className='flex flex-col justify-end'>
+			<img
+				src={imageSrc}
+				alt='Teacher'
+				className={`h-100 object-contain transition-opacity duration-300 ${
+					isLoaded ? "opacity-100" : "opacity-0"
+				}`}
+				onLoad={() => setIsLoaded(true)}
+				loading='lazy'
+			/>
+		</div>
+	);
+};
 
 const ModuleInfo = ({ name, ekap }) => {
 	const buttonClass =

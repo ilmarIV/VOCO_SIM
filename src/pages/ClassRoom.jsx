@@ -59,9 +59,11 @@ const AnswerButton = ({
 
 function ClassRoom() {
 	//const location = useLocation();
-	//const { moduleId } = location.state || {};
+	//const { moduleId, hasQuiz, customIntroText } = location.state || {};
 
 	let moduleId = 9240; // Testimiseks
+	let hasQuiz = false;
+	let customIntroText = "Tere tulemast klassiruumi!";
 
 	const { completeCourse } = useCurrentYearsCourses();
 
@@ -84,6 +86,10 @@ function ClassRoom() {
 		totalQuestions === 0 ? 0 : (answeredQuestions / totalQuestions) * 100;
 	const currentQuestion = moduleData?.quiz.questions[currentQuestionIndex];
 	const isLastQuestion = currentQuestionIndex === totalQuestions - 1;
+
+	const handleStartWithoutQuiz = () => {
+		console.log("Course completed without quiz:", moduleData?.name);
+	};
 
 	const validateAnswer = useCallback(
 		(userAnswer) => {
@@ -125,7 +131,7 @@ function ClassRoom() {
 		]
 	);
 
-	if (!hasStarted) {
+	if (!hasStarted || !hasQuiz) {
 		return (
 			<div className='w-full h-full flex justify-between p-8 pb-0 relative'>
 				<TeacherDisplay teacherId={randomTeacher} mood={teacherMood} />
@@ -133,13 +139,21 @@ function ClassRoom() {
 				<div className='flex-1 flex flex-col items-center justify-center space-y-6 max-w-2xl'>
 					<div className='bg-white rounded-3xl rounded-bl-none p-6 shadow-lg w-full'>
 						<p className='text-gray-800 text-lg'>
-							{moduleData?.description || "Kirjeldus"}
+							{hasQuiz
+								? customIntroText
+								: moduleData?.description || "Kirjeldus"}
 						</p>
 					</div>
 				</div>
 
 				<button
-					onClick={() => setHasStarted(true)}
+					onClick={() => {
+						if (hasQuiz) {
+							setHasStarted(true);
+						} else {
+							handleStartWithoutQuiz();
+						}
+					}}
 					className='absolute bottom-5 right-10 mb-4 ml-4 px-6 py-3 bg-white font-bold text-black rounded-full hover:bg-gray-400 transition-colors shadow-md cursor-pointer flex items-center gap-2'
 				>
 					Alusta

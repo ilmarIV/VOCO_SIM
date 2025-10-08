@@ -1,0 +1,528 @@
+{
+	"VS24": {
+		"courses": [
+			{
+				"name": "Programmeerimise alused",
+				"ekap": 7,
+				"teacher": "Õpetajate meeskond",
+				"year": 1,
+				"description": "Mõista programmeerimise põhiolemust, terminoloogiat ning luua lihtsamaid rakendusi. Teemad: arvusüsteemid, loogika, funktsioonid, rakendusstatistika.",
+				"quiz": {
+					"questions": [
+						{
+							"q": "Mis on kahend- ja kümnendsüsteemi põhiline erinevus?",
+							"options": [
+								"Alus: kahendil 2, kümnendil 10",
+								"Kahend toetab vaid paarisarve",
+								"Kümnend ei toeta liitmist"
+							],
+							"answer": 0
+						},
+						{
+							"q": "Millise loogikatehtega vastab lausearvutuses 'JA'?",
+							"options": ["OR", "AND", "NOT"],
+							"answer": 1
+						},
+						{
+							"q": "Milleks kasutatakse rakendusstatistikat aines?",
+							"options": [
+								"Andmete kogumiseks ja kirjeldamiseks (graafikud, tabelid)",
+								"Ainult koodi kompileerimiseks",
+								"Võrguliikluse šifreerimiseks"
+							],
+							"answer": 0
+						}
+					]
+				}
+			},
+
+			{
+				"name": "Veebirakenduste loomine",
+				"ekap": 10,
+				"teacher": "Õpetajate meeskond",
+				"year": 1,
+				"description": "Luua asünkroonsete osadega turvalisi veebirakendusi kasutades HTML/CSS/JS, AJAXi ja serveripoolseid tehnoloogiaid (nt LAMP, Java/Spring). Lingitud OWASP põhimõtetega.",
+				"quiz": {
+					"questions": [
+						{
+							"q": "Mis on AJAXi põhiidee?",
+							"options": [
+								"Sünkroonne lehe täislaadimine iga päringu järel",
+								"Asünkroonne andmete pärimine ilma lehte täielikult laadimata",
+								"CSS klasside genereerimine serveris"
+							],
+							"answer": 1
+						},
+						{
+							"q": "Milline väide vastab W3C standardite mõttele?",
+							"options": [
+								"Kirjutame brauserispetsiifilist koodi ainult IE jaoks",
+								"Kasutame valideeritavat, standarditele vastavat HTML/CSS",
+								"CSS on tarbetu, piisab ainult HTML-ist"
+							],
+							"answer": 1
+						},
+						{
+							"q": "OWASP TOP10 eesmärk on…",
+							"options": [
+								"Kirjeldada enamlevinud veebi ründevektoreid",
+								"Optimeerida pildifaile",
+								"Hallata projektiplaani Gantti graafikus"
+							],
+							"answer": 0
+						}
+					]
+				}
+			},
+			{
+				"name": "Andmebaasisüsteemid",
+				"ekap": 7,
+				"teacher": "Õpetajate meeskond",
+				"year": 1,
+				"description": "Luua lihtne relatsiooniline andmebaas ning kasutada päringukeeli andmete lisamiseks, muutmiseks ja leidmiseks. Teemad: AB mudelid, ER/UML, andmetüübid.",
+				"quiz": {
+					"questions": [
+						{
+							"q": "Milline on relatsioonilise andmebaasi põhistruktuur?",
+							"options": [
+								"Võrgugraaf",
+								"Tabelid ja seosed",
+								"Objektorienteeritud puu"
+							],
+							"answer": 1
+						},
+						{
+							"q": "Milleks kasutatakse ER-diagrammi?",
+							"options": [
+								"Kasutajaliidese värviskeemi valikuks",
+								"Andmebaasi olemite ja seoste modelleerimiseks",
+								"Serveri RAM-i määramiseks"
+							],
+							"answer": 1
+						},
+						{
+							"q": "Milline SQL-käsk lisab uusi ridu tabelisse?",
+							"options": ["SELECT", "INSERT", "CREATE INDEX"],
+							"answer": 1
+						}
+					]
+				}
+			},
+			{
+				"name": "Hajusrakenduste alused",
+				"ekap": 5,
+				"teacher": "Õpetajate meeskond",
+				"year": 2,
+				"description": "Luua hajus arhitektuur, liidestada veebiteenuseid (SOAP/REST), kasutada JSON/XML andmevahetust ning käsitleda sünkroonseid ja asünkroonseid andmeülekandeid.",
+				"quiz": {
+					"questions": [
+						{
+							"q": "Milline on RESTi tavapärane andmeformaat?",
+							"options": ["BMP", "JSON", "DOCX"],
+							"answer": 1
+						},
+						{
+							"q": "Miks kasutatakse puhverdamist (caching)?",
+							"options": [
+								"Turvalisuse suurendamiseks",
+								"Käideldavuse ja jõudluse parandamiseks",
+								"Koodi esteetiliseks vormindamiseks"
+							],
+							"answer": 1
+						},
+						{
+							"q": "Mis on peamine erinevus sünkroonse ja asünkroonse päringu vahel?",
+							"options": [
+								"Asünkroonne ei oota vastust enne jätkamist",
+								"Sünkroonne on alati kiirem",
+								"Asünkroonne kasutab alati SOAPi"
+							],
+							"answer": 0
+						}
+					]
+				}
+			},
+			{
+				"name": "Tarkvarasüsteemide testimine",
+				"ekap": 5,
+				"teacher": "Õpetajate meeskond",
+				"year": 2,
+				"description": "Koostada testimisplaan, rakendada erinevaid testimismeetodeid ja -vahendeid, kasutada automaat- ja UI-teste (nt ühiktestid) vastavuse kontrolliks. (EKAP kontrolli)",
+				"quiz": {
+					"questions": [
+						{
+							"q": "Mida teeb testimisplaan?",
+							"options": [
+								"Kirjeldab testimise eesmärgid, ulatuse ja meetodid",
+								"Seadistab automaatselt CI/CD",
+								"Kirjeldab kasutajaliidese värvipaleti"
+							],
+							"answer": 0
+						},
+						{
+							"q": "Mis on ühiktest?",
+							"options": [
+								"Test kogu süsteemi koormusel",
+								"Ühe väikese koodiosa funktsionaalsuse test",
+								"Kasutaja koolitusprogramm"
+							],
+							"answer": 1
+						},
+						{
+							"q": "UI testide eesmärk on…",
+							"options": [
+								"Mõõta serveri ketta IOPS-i",
+								"Automatiseeritult kontrollida kasutajaliidese käitumist",
+								"Parandada CSSi minifitseerimist"
+							],
+							"answer": 1
+						}
+					]
+				}
+			},
+			{
+				"name": "IT juhtimine ja rakendamine organisatsioonides",
+				"ekap": 3,
+				"teacher": "Õpetajate meeskond",
+				"year": 2,
+				"description": "IT-roll majanduses ja organisatsioonis, IT- ja äriprotsesside seosed, teenustasemed (SLA), auditid ja küberturve (ISKE/ISO 27k), GDPR ja litsentsid.",
+				"quiz": {
+					"questions": [
+						{
+							"q": "Milleks on teenustasemeleping (SLA)?",
+							"options": [
+								"Kirjeldab teenuse kvaliteedi parameetreid ja mõõtmist",
+								"Kirjeldab ainult arenduse värviskeeme",
+								"On kasutatav vaid avalikus sektoris"
+							],
+							"answer": 0
+						},
+						{
+							"q": "Milline raamistik on Eesti etalonturbe alus?",
+							"options": ["COBIT", "ISKE", "ITIL v2"],
+							"answer": 1
+						},
+						{
+							"q": "Mida käsitleb GDPR?",
+							"options": [
+								"Isikuandmete kaitset ja töötlemist",
+								"Riistvara garantiitingimusi",
+								"Pilditöötluse filtreid"
+							],
+							"answer": 0
+						}
+					]
+				}
+			},
+			{
+				"name": "Kasutajaliidese disain",
+				"ekap": 5,
+				"teacher": "Õpetajate meeskond",
+				"year": 2,
+				"description": "Kasutajakogemuse (UX) analüüs, personad ja kasutuslood, prototüüpimine ning disainimustrid ja värviskeemid.",
+				"quiz": {
+					"questions": [
+						{
+							"q": "Mis on persona UX-is?",
+							"options": [
+								"Kasutaja segmendi tüüpiline esindaja koos eesmärkide ja vajadustega",
+								"Kasutajaliidese ikoonipakk",
+								"Serveri kasutaja"
+							],
+							"answer": 0
+						},
+						{
+							"q": "Mida teed pärast kasutajaintervjuusid?",
+							"options": [
+								"Visandad kasutuslood ja valideerid need tagasisidega",
+								"Koostad kohe REST API",
+								"Lood CSS muutujad"
+							],
+							"answer": 0
+						},
+						{
+							"q": "Disainimustri roll on…",
+							"options": [
+								"Anda korduvatele probleemidele tõestatud lahendus",
+								"Keelata prototüüpimine",
+								"Automaattestid käivitada"
+							],
+							"answer": 0
+						}
+					]
+				}
+			},
+			{
+				"name": "Raamistiku kasutamine arendustegevusel",
+				"ekap": 2,
+				"teacher": "Õpetajate meeskond",
+				"year": 2,
+				"description": "Tutvuda ja võrrelda levinud arendusraamistikke ning rakendada üks neist projekti töös.",
+				"quiz": {
+					"questions": [
+						{
+							"q": "Miks kasutatakse raamistikke?",
+							"options": [
+								"Et mitte midagi ise kirjutada",
+								"Kiirendamaks arendust ja tagada ühtlane struktuur",
+								"Sest brauserid seda nõuavad"
+							],
+							"answer": 1
+						},
+						{
+							"q": "Mis on hea praktika raamistikku valides?",
+							"options": [
+								"Valida juhuslikult trendikaim",
+								"Lähtuda projekti nõuetest ja ökosüsteemist",
+								"Vältida dokumentatsiooni lugemist"
+							],
+							"answer": 1
+						},
+						{
+							"q": "Mis on React/Angular/Vue?",
+							"options": [
+								"CSS preprotsessorid",
+								"JS kasutajaliidese raamistikud/teegid",
+								"Andmebaasimootorid"
+							],
+							"answer": 1
+						}
+					]
+				}
+			},
+			{
+				"name": "Tootearendus (TOY)",
+				"ekap": 4,
+				"teacher": "Õpetajate meeskond",
+				"year": 2,
+				"description": "Meeskonnas tooteidee arendamine TOY meetodil: ideede genereerimine, visualiseerimine, prototüüpimine ja esitlemine.",
+				"quiz": {
+					"questions": [
+						{
+							"q": "Mis on TOY meetodi fookus?",
+							"options": [
+								"Paberprototüübid ja kiire iteratsioon",
+								"Ainult backendi optimeerimine",
+								"Värviharmoonia teooria"
+							],
+							"answer": 0
+						},
+						{
+							"q": "Miks visualiseerida ideid varakult?",
+							"options": [
+								"Selleks et meeskond ja kliendid saaksid kiirelt tagasisidet anda",
+								"Et vältida igasugust muutmist",
+								"Et muuta prototüübid peidetuks"
+							],
+							"answer": 0
+						},
+						{
+							"q": "Coach’i roll meeskonnas on…",
+							"options": [
+								"Aidata protsessi, mitte ette öelda lahendust",
+								"Kirjutada kogu kood",
+								"Testida automaatselt UI-d"
+							],
+							"answer": 0
+						}
+					]
+				}
+			},
+			{
+				"name": "Veebikujundus",
+				"ekap": 5,
+				"teacher": "Õpetajate meeskond",
+				"year": 1,
+				"description": "Veebikujunduse alused: UX uuring, prototüübid, ligipääsetavus ja responsive mustrid. (EKAP kontrolli)",
+				"quiz": {
+					"questions": [
+						{
+							"q": "Mis on 'responsive' disain?",
+							"options": [
+								"Leht kohandub eri ekraanisuurustele",
+								"Leht vastab kasutaja e-kirjadele",
+								"Leht pole vaadeldav mobiilis"
+							],
+							"answer": 0
+						},
+						{
+							"q": "Kasutajatestimise eesmärk?",
+							"options": [
+								"Leida UX probleemid enne arendust ja selle ajal",
+								"Testida ainult serverikoormust",
+								"Valida logotüübi värv"
+							],
+							"answer": 0
+						},
+						{
+							"q": "Ligipääsetavus tähendab…",
+							"options": [
+								"Leht töötab ainult hiirega",
+								"Leht arvestab erivajadustega kasutajatega",
+								"Leht keelab klaviatuuri"
+							],
+							"answer": 1
+						}
+					]
+				}
+			},
+			{
+				"name": "Digitehnoloogia alused",
+				"ekap": 3,
+				"teacher": "Õpetajate meeskond",
+				"year": 1,
+				"description": "Digiteenused, andmeanalüüsi põhimõtted ja digitehnoloogia mõju ühiskonnale ning ettevõtlusele. (EKAP kontrolli)",
+				"quiz": {
+					"questions": [
+						{
+							"q": "Mis on suurandmete (Big Data) väärtus?",
+							"options": [
+								"Failid on alati väiksemad",
+								"Võimaldab mustreid ja trende tuvastada suurest andmehulgast",
+								"Vähendab alati privaatsusriske nullini"
+							],
+							"answer": 1
+						},
+						{
+							"q": "Kirjeldavad statistikud on…",
+							"options": [
+								"Keskmine, mediaan, standardhälve jmt",
+								"Ainult masinõppemudelid",
+								"Võrguprotokollid"
+							],
+							"answer": 0
+						},
+						{
+							"q": "Digitehnoloogia mõju ettevõtlusele hõlmab…",
+							"options": [
+								"Automatiseerimist, uusi teenuseid ja turge",
+								"Vaid bürokraatiat",
+								"Ainult paberdokumentide kasutust"
+							],
+							"answer": 0
+						}
+					]
+				}
+			},
+			{
+				"name": "Praktika I",
+				"ekap": 10,
+				"teacher": "Praktikakoordinaator",
+				"year": 1,
+				"description": "Esimese kursuse praktika: tutvuda arendusmeeskonna tööga, leida praktikakoht, püstitada isiklik praktikaeesmärk, täita dokumentatsioon.",
+				"quiz": {
+					"questions": [
+						{
+							"q": "Milline dokument kirjeldab praktikandi ülesandeid ja eesmärke?",
+							"options": [
+								"GDPR poliitika",
+								"Praktikajuhend ja isiklik ülesanne",
+								"Kasutuslood"
+							],
+							"answer": 1
+						},
+						{
+							"q": "Mis tõendab praktika toimumist ja sisu?",
+							"options": [
+								"Praktikaleping, aruanded ja päevik",
+								"Ainult suuline kinnitus",
+								"Sotsiaalmeedia postitus"
+							],
+							"answer": 0
+						},
+						{
+							"q": "Kust otsida erialast infot meeskonnas?",
+							"options": [
+								"Usaldusväärsed infokanalid ja kolleegid",
+								"Ainult anonüümsed foorumid",
+								"Juhuslik TikTok"
+							],
+							"answer": 0
+						}
+					]
+				},
+				"practice": true
+			},
+			{
+				"name": "Praktika II",
+				"ekap": 20,
+				"teacher": "Praktikakoordinaator",
+				"year": 2,
+				"description": "Teise kursuse praktika: osaleda tegelikus tarkvaraprojektis, analüüsida metoodikat, hinnata enda valmisolekut tööle asumiseks.",
+				"quiz": {
+					"questions": [
+						{
+							"q": "Mida sisaldab praktikaaruande tehniline osa?",
+							"options": [
+								"Projektikirjeldus, rollid, metoodika ja vahendid",
+								"Ainult foto tööarvutist",
+								"Kliendi turundusplaan"
+							],
+							"answer": 0
+						},
+						{
+							"q": "Miks analüüsida kasutatavat arendusmetoodikat?",
+							"options": [
+								"Et mõista protsessi tugevusi/nõrkusi ja parendada kvaliteeti",
+								"Et hinnata ainult UI värve",
+								"Et vältida dokumentatsiooni"
+							],
+							"answer": 0
+						},
+						{
+							"q": "Mida tehakse praktika lõpus eneseanalüüsis?",
+							"options": [
+								"Hinnatakse oma tugevusi, arenguvajadusi ja töövalmidust",
+								"Antakse hindeid kolleegidele",
+								"Kustutatakse kõik märkmed"
+							],
+							"answer": 0
+						}
+					]
+				},
+				"practice": true
+			},
+			{
+				"name": "Lõputöö (Infosüsteemi loomine)",
+				"ekap": 7,
+				"teacher": "Juhendaja",
+				"year": 2,
+				"description": "Rühmatööna kliendi vajadustest lähtuv infosüsteemi projekteerimine, arendus iteratsioonidena, demo, testimine ja dokumenteerimine.",
+				"quiz": {
+					"questions": [
+						{
+							"q": "Mis on backlog?",
+							"options": [
+								"Kasutajalugude ja tööde prioriteetne loetelu",
+								"Andmebaasi varukoopia",
+								"CSS muutujate kogum"
+							],
+							"answer": 0
+						},
+						{
+							"q": "Miks teha demot igas iteratsioonis?",
+							"options": [
+								"Kiire tagasiside kliendilt ja kursi korrigeerimine",
+								"Et peita puudused",
+								"Et vähendada versioonihaldust"
+							],
+							"answer": 0
+						},
+						{
+							"q": "Mis iseloomustab eristavat hindamist?",
+							"options": [
+								"Hinnatakse tasemetel (3/4/5) vastavalt kriteeriumitele",
+								"Ainult 'arvestatud/mittearvestatud'",
+								"Loosi teel"
+							],
+							"answer": 0
+						}
+					]
+				}
+			}
+		]
+	},
+	"UX24": {
+		"courses": []
+	}
+}

@@ -26,7 +26,7 @@ function GameWindowWrapper({ children }) {
 				break;
 			}
 			case "/floormap":
-				setBackgroundImage(`url('../misc/floor_map.png')`);
+				setBackgroundImage(`url('../map.png')`);
 				break;
 			default:
 				setBackgroundImage(null);

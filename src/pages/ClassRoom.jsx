@@ -1,10 +1,9 @@
-import { useState, useMemo, useCallback } from "react";
+import { useState, useCallback } from "react";
 import ProgressBar from "../components/ProgressBar";
 import { useCurrentYearsCourses } from "../context/CurrentYearsCoursesContext";
-import ModulesData from "../assets/moodulid-game.json";
 import { FaChevronRight } from "react-icons/fa";
-//import { useLocation } from "react-router-dom";
-
+import { useLocation } from "react-router-dom";
+import { useGameState } from "../context/GameStateContext";
 const TeacherDisplay = ({ teacherId, mood }) => (
 	<div className='flex flex-col justify-end'>
 		<img
@@ -58,19 +57,13 @@ const AnswerButton = ({
 };
 
 function ClassRoom() {
-	//const location = useLocation();
-	//const { moduleId, hasQuiz, customIntroText } = location.state || {};
+	const location = useLocation();
+	const { quizData, moduleData, subjectData } = location.state || {};
 
-	let moduleId = 9240; // Testimiseks
-	let hasQuiz = false;
-	let customIntroText = "Tere tulemast klassiruumi!";
+	let hasQuiz = !!quizData;
 
 	const { completeCourse } = useCurrentYearsCourses();
-
-	const moduleData = useMemo(
-		() => ModulesData.modules.find((m) => m.id === moduleId),
-		[moduleId]
-	);
+	const { selectProgram } = useGameState();
 
 	const [hasStarted, setHasStarted] = useState(false);
 	const [teacherMood, setTeacherMood] = useState("happy");
@@ -81,14 +74,14 @@ function ClassRoom() {
 	const [isAnswerWrong, setIsAnswerWrong] = useState(false);
 	const [isTransitioning, setIsTransitioning] = useState(false);
 
-	const totalQuestions = moduleData?.quiz.questions.length || 0;
+	const totalQuestions = quizData?.questions.length || 0;
 	const percentage =
 		totalQuestions === 0 ? 0 : (answeredQuestions / totalQuestions) * 100;
-	const currentQuestion = moduleData?.quiz.questions[currentQuestionIndex];
+	const currentQuestion = quizData?.questions[currentQuestionIndex];
 	const isLastQuestion = currentQuestionIndex === totalQuestions - 1;
 
-	const handleStartWithoutQuiz = () => {
-		console.log("Course completed without quiz:", moduleData?.name);
+	const handleStartWithoutQuiz = (subjectId) => {
+		selectProgram(subjectId);
 	};
 
 	const validateAnswer = useCallback(
@@ -139,8 +132,9 @@ function ClassRoom() {
 				<div className='flex-1 flex flex-col items-center justify-center space-y-6 max-w-2xl'>
 					<div className='bg-white rounded-3xl rounded-bl-none p-6 shadow-lg w-full'>
 						<p className='text-gray-800 text-lg'>
-							{hasQuiz
-								? customIntroText
+							{!hasQuiz
+								? subjectData?.description ||
+								  "Sellel erialal ei ole veel kursusi."
 								: moduleData?.description || "Kirjeldus"}
 						</p>
 					</div>
@@ -151,7 +145,7 @@ function ClassRoom() {
 						if (hasQuiz) {
 							setHasStarted(true);
 						} else {
-							handleStartWithoutQuiz();
+							handleStartWithoutQuiz(subjectData?.id);
 						}
 					}}
 					className='absolute bottom-5 right-10 mb-4 ml-4 px-6 py-3 bg-white font-bold text-black rounded-full hover:bg-gray-400 transition-colors shadow-md cursor-pointer flex items-center gap-2'

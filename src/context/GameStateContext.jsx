@@ -26,7 +26,16 @@ export const GameStateProvider = ({ children }) => {
 
 	const finishYear = () => {
 		// method to increase year, is used in CurrentYearsCoursesContext after all courses are completed
-		setCurrentYear((prev) => prev + 1);
+
+		navigate("/classroom", {
+			state: {
+				subjectData: {
+					id: null,
+					description:
+						subjectsData[program]?.year_2_description || "Ilma edasi!",
+				},
+			},
+		});
 
 		if (currentYear >= amountYears) {
 			localStorage.setItem(`${program}_completed`, "true");
@@ -50,6 +59,7 @@ export const GameStateProvider = ({ children }) => {
 				selectProgram,
 				goToRoute,
 				finishYear,
+				setCurrentYear,
 			}}
 		>
 			{children}

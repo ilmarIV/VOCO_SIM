@@ -18,14 +18,14 @@ function ProgressMenu() {
 			: 0;
 
 	return (
-		<div className='absolute top-50 right-5 flex flex-col items-end space-y-2'>
+		<div className='absolute top-50 right-10 flex flex-col items-end space-y-2'>
 			{/* Percentage bar of completed courses */}
-			<ProgressBar percentage={completedQuestPercentage} />
+			<ProgressBar percentage={completedQuestPercentage} huge={true} />
 
 			{/* Button to open courses modal */}
 			<button
 				onClick={() => setCoursesModalIsOpen(true)}
-				className='p-2 rounded bg-green-400 hover:bg-green-600 text-white shadow cursor-pointer z-2'
+				className='p-4 rounded-xl bg-green-400 hover:bg-green-600 text-white text-md shadow-xl cursor-pointer z-2'
 			>
 				<FaScroll />
 			</button>

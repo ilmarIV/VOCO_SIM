@@ -172,7 +172,7 @@ function ClassRoom() {
 			<ModuleInfo name={moduleData?.name} ekap={moduleData?.ekap} />
 
 			<div className='flex justify-center flex-col'>
-				<ProgressBar percentage={percentage} huge={true} />
+				<ProgressBar percentage={percentage} huge={true} rightAlign={false} />
 			</div>
 
 			<TeacherDisplay teacherId={randomTeacher} mood={teacherMood} />

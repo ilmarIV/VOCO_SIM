@@ -1,8 +1,8 @@
 {
 	"VS24": {
-		"name": "Veebiarendus",
+		"name": "Noorem tarkvaraarendaja",
 		"years": 2,
-		"description": "Õpid, kuidas luua ja hallata veebilehti ning veebirakendusi, kasutades HTML-i, CSS-i ja JavaScripti.",
+		"description": "Noorem tarkvaraarendaja on alustav spetsialist, kes õpib tarkvaraarenduse põhialuseid ning omandab oskusi erinevate tehnoloogiate ja töövahendite kasutamisel. Õppe käigus saadakse tugev tehniline baas, mis loob vundamendi edasiseks arenguks IT-valdkonnas..",
 		"year_2_description": "ÕPPEAASTA LÄBI! Nüüd saad süveneda keerukamatesse veebitehnoloogiatesse nagu React, Node.js ja andmebaasid."
 	},
 

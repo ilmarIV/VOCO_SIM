@@ -26,7 +26,7 @@ const TeacherDisplay = ({ teacherId, mood }) => {
 
 const ModuleInfo = ({ name, ekap }) => {
 	const buttonClass =
-		"px-6 py-2 bg-transparent border-2 border-white text-white rounded-full font-medium hover:bg-white hover:text-black transition-colors";
+		"px-6 py-2 bg-transparent border-2 border-white text-white rounded-full font-medium ";
 
 	return (
 		<div className='absolute top-4 right-4 flex gap-3'>

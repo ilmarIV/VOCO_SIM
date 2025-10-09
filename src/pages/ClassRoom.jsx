@@ -34,12 +34,13 @@ const TeacherDisplay = ({ teacherId, mood }) => {
 	);
 };
 
-const ModuleInfo = ({ name, ekap }) => {
+const ModuleInfo = ({ name, ekap, year }) => {
 	const buttonClass =
 		"px-6 py-2 bg-transparent border-2 border-white text-white rounded-full font-medium ";
 
 	return (
 		<div className='absolute top-4 right-4 flex gap-3'>
+			<button className={buttonClass}>{year} Aasta</button>
 			<button className={buttonClass}>{name || "Õppeaine nimetus nt"}</button>
 			<button className={buttonClass}>{ekap || ""} EKAP</button>
 		</div>
@@ -83,7 +84,7 @@ function ClassRoom() {
 	let hasQuiz = !!quizData;
 
 	const { completeCourse } = useCurrentYearsCourses();
-	const { selectProgram } = useGameState();
+	const { selectProgram, setCurrentYear, currentYear } = useGameState();
 
 	const [hasStarted, setHasStarted] = useState(false);
 	const [teacherMood, setTeacherMood] = useState("happy");
@@ -122,6 +123,7 @@ function ClassRoom() {
 	}, [currentQuestion]);
 
 	const handleStartWithoutQuiz = (subjectId) => {
+		if (!subjectId) return setCurrentYear((prev) => prev + 1);
 		selectProgram(subjectId);
 	};
 
@@ -200,7 +202,11 @@ function ClassRoom() {
 
 	return (
 		<div className='w-full h-full flex justify-between p-8 pb-0 relative'>
-			<ModuleInfo name={moduleData?.name} ekap={moduleData?.ekap} />
+			<ModuleInfo
+				name={moduleData?.name}
+				ekap={moduleData?.ekap}
+				year={currentYear}
+			/>
 
 			<div className='flex justify-center flex-col'>
 				<ProgressBar percentage={percentage} huge={true} />

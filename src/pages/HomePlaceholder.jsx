@@ -13,7 +13,7 @@ function VideoLoader() {
 	);
 }
 
-function VideoPlayer({ src, onEnded, onLoadedData }) {
+function VideoPlayer({ src, onEnded, onLoadedData, isIntro }) {
 	const videoRef = useRef(null);
 
 	const handleSkip = () => {
@@ -43,7 +43,7 @@ function VideoPlayer({ src, onEnded, onLoadedData }) {
 				onClick={handleSkip}
 				className='absolute bottom-8 right-8 px-6 py-3 bg-white/90 hover:bg-white text-black font-bold rounded-full transition-all duration-300 hover:scale-105 shadow-lg cursor-pointer'
 			>
-				Edasi
+				{isIntro ? "Edasi" : "Tagasi Algusesse"}
 			</button>
 		</>
 	);
@@ -111,6 +111,7 @@ function HomePlaceholder() {
 					src={videoSrc}
 					onEnded={handleVideoEnd}
 					onLoadedData={() => setIsVideoLoaded(true)}
+					isIntro={showIntro}
 				/>
 			</div>
 		);

@@ -2,13 +2,15 @@
 	"VS24": {
 		"name": "Veebiarendus",
 		"years": 2,
-		"description": "Õpid, kuidas luua ja hallata veebilehti ning veebirakendusi, kasutades HTML-i, CSS-i ja JavaScripti."
+		"description": "Õpid, kuidas luua ja hallata veebilehti ning veebirakendusi, kasutades HTML-i, CSS-i ja JavaScripti.",
+		"year_2_description": "ÕPPEAASTA LÄBI! Nüüd saad süveneda keerukamatesse veebitehnoloogiatesse nagu React, Node.js ja andmebaasid."
 	},
 
 	"UX24": {
 		"name": "UI/UX",
 		"years": 2,
 		"description": "Õpid, kuidas luua kasutajasõbralikke liideseid ja parandada kasutajakogemust.",
+		"year_2_description": "1 AASTA LÄBI! Nüüd saad süveneda keerukamatesse disainitehnikatesse ja kasutajauuringutesse.",
 		"disabled": true
 	}
 }

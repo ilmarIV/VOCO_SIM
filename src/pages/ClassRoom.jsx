@@ -1,9 +1,19 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useMemo } from "react";
 import ProgressBar from "../components/ProgressBar";
 import { useCurrentYearsCourses } from "../context/CurrentYearsCoursesContext";
 import { FaChevronRight } from "react-icons/fa";
 import { useLocation } from "react-router-dom";
 import { useGameState } from "../context/GameStateContext";
+
+// Fisher-Yates shuffle algorithm
+const shuffleArray = (array) => {
+	const shuffled = [...array];
+	for (let i = shuffled.length - 1; i > 0; i--) {
+		const j = Math.floor(Math.random() * (i + 1));
+		[shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+	}
+	return shuffled;
+};
 
 const TeacherDisplay = ({ teacherId, mood }) => {
 	const [isLoaded, setIsLoaded] = useState(false);
@@ -90,16 +100,37 @@ function ClassRoom() {
 	const currentQuestion = quizData?.questions[currentQuestionIndex];
 	const isLastQuestion = currentQuestionIndex === totalQuestions - 1;
 
+	// Shuffle options and track the correct answer's new position
+	const shuffledQuestion = useMemo(() => {
+		if (!currentQuestion) return null;
+
+		const optionsWithIndex = currentQuestion.options.map((option, index) => ({
+			text: option,
+			originalIndex: index,
+		}));
+
+		const shuffled = shuffleArray(optionsWithIndex);
+		const newCorrectIndex = shuffled.findIndex(
+			(item) => item.originalIndex === currentQuestion.answer
+		);
+
+		return {
+			...currentQuestion,
+			shuffledOptions: shuffled,
+			correctAnswerIndex: newCorrectIndex,
+		};
+	}, [currentQuestion]);
+
 	const handleStartWithoutQuiz = (subjectId) => {
 		selectProgram(subjectId);
 	};
 
 	const validateAnswer = useCallback(
 		(userAnswer) => {
-			if (!currentQuestion || isTransitioning) return;
+			if (!shuffledQuestion || isTransitioning) return;
 
 			setSelectedAnswer(userAnswer);
-			const isCorrect = currentQuestion.answer === userAnswer;
+			const isCorrect = shuffledQuestion.correctAnswerIndex === userAnswer;
 
 			if (isCorrect) {
 				setAnsweredQuestions((prev) => prev + 1);
@@ -126,7 +157,7 @@ function ClassRoom() {
 			}
 		},
 		[
-			currentQuestion,
+			shuffledQuestion,
 			isTransitioning,
 			isLastQuestion,
 			completeCourse,
@@ -180,15 +211,15 @@ function ClassRoom() {
 			<div className='flex-1 flex flex-col items-center justify-center space-y-6 max-w-2xl'>
 				<div className='bg-white rounded-3xl rounded-bl-none p-6 shadow-lg w-full'>
 					<p className='text-gray-800 text-lg'>
-						{currentQuestion?.q || "Küsimus"}
+						{shuffledQuestion?.q || "Küsimus"}
 					</p>
 				</div>
 
 				<div className='grid grid-cols-2 gap-4 w-full'>
-					{currentQuestion?.options.map((questionText, index) => (
+					{shuffledQuestion?.shuffledOptions.map((option, index) => (
 						<AnswerButton
 							key={index}
-							text={questionText}
+							text={option.text}
 							index={index}
 							isSelected={selectedAnswer === index}
 							isWrong={isAnswerWrong}

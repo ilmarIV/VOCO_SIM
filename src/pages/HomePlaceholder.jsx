@@ -131,7 +131,7 @@ function HomePlaceholder() {
 					{subjects.map((subject) => (
 						<button
 							key={subject.id}
-							disabled={subject.isCompleted}
+							disabled={subject.isCompleted || subject.disabled}
 							className='bg-white hover:bg-gray-100 p-6 rounded-xl shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-2xl text-left group cursor-pointer w-full disabled:opacity-50 disabled:cursor-not-allowed'
 							onClick={() =>
 								handleSubjectClick(subject.id, subject.description)

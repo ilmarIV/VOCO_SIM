@@ -8,6 +8,7 @@
 	"UX24": {
 		"name": "UI/UX",
 		"years": 2,
-		"description": "Õpid, kuidas luua kasutajasõbralikke liideseid ja parandada kasutajakogemust."
+		"description": "Õpid, kuidas luua kasutajasõbralikke liideseid ja parandada kasutajakogemust.",
+		"disabled": true
 	}
 }

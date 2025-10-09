@@ -5,64 +5,92 @@ import { useNavigate } from "react-router-dom";
 import subjectData from "../assets/subjects.json";
 import { useState, useEffect, useRef } from "react";
 
+function VideoLoader() {
+	return (
+		<div className='w-full h-full flex items-center justify-center bg-black'>
+			<div className='w-16 h-16 border-4 border-white border-t-transparent rounded-full animate-spin'></div>
+		</div>
+	);
+}
+
+function VideoPlayer({ src, onEnded, onLoadedData }) {
+	const videoRef = useRef(null);
+
+	const handleSkip = () => {
+		if (videoRef.current) {
+			videoRef.current.pause();
+		}
+		onEnded();
+	};
+
+	return (
+		<>
+			<video
+				ref={videoRef}
+				className='w-full h-full object-contain'
+				autoPlay
+				muted
+				playsInline
+				onEnded={onEnded}
+				onLoadedData={onLoadedData}
+				onError={(e) => console.error("Video error:", e)}
+			>
+				<source src={src} type='video/mp4' />
+				Your browser does not support the video tag.
+			</video>
+
+			<button
+				onClick={handleSkip}
+				className='absolute bottom-8 right-8 px-6 py-3 bg-white/90 hover:bg-white text-black font-bold rounded-full transition-all duration-300 hover:scale-105 shadow-lg cursor-pointer'
+			>
+				Edasi
+			</button>
+		</>
+	);
+}
+
 function HomePlaceholder() {
 	const navigate = useNavigate();
-	const videoRef = useRef(null);
 	const [showIntro, setShowIntro] = useState(
-		localStorage.getItem("show_outro") ? false : true
+		localStorage.getItem("show_outro") !== "true"
 	);
 	const [showOutro, setShowOutro] = useState(false);
 	const [isVideoLoaded, setIsVideoLoaded] = useState(false);
 
 	useEffect(() => {
-		//const hasSeenIntro = localStorage.getItem("has_seen_intro");
 		const shouldShowOutro = localStorage.getItem("show_outro");
-		console.log(shouldShowOutro);
 		if (shouldShowOutro === "true") {
 			setShowOutro(true);
+			setShowIntro(false);
 			localStorage.removeItem("show_outro");
-			/* } else if (!hasSeenIntro) {
-			localStorage.setItem("has_seen_intro", "true");
-			setShowIntro(true); */
 		}
 	}, []);
 
-	useEffect(() => {
-		if ((showIntro || showOutro) && videoRef.current) {
-			videoRef.current.play().catch((error) => {
-				console.error("Video autoplay failed:", error);
-			});
-		}
-	}, [showIntro, showOutro]);
-
-	const handleSkipVideo = () => {
-		if (showIntro) {
-			localStorage.setItem("has_seen_intro", "true");
-			setShowIntro(false);
-		}
-		if (showOutro) {
-			setShowOutro(false);
-		}
-		if (videoRef.current) {
-			videoRef.current.pause();
-		}
-	};
-
 	const handleVideoEnd = () => {
 		if (showIntro) {
-			localStorage.setItem("has_seen_intro", "true");
 			setShowIntro(false);
 		}
 		if (showOutro) {
 			setShowOutro(false);
 		}
+		setIsVideoLoaded(false);
 	};
+
 	const handleSubjectClick = (subjectId, subjectDescription) => {
 		navigate("/classroom", {
 			state: {
 				subjectData: { id: subjectId, description: subjectDescription },
 			},
 		});
+	};
+
+	const handleResetProgress = () => {
+		if (
+			window.confirm("Kas oled kindel, et soovid kõik edusammud lähtestada?")
+		) {
+			localStorage.clear();
+			window.location.reload();
+		}
 	};
 
 	const [subjects] = useState(() => {
@@ -73,70 +101,23 @@ function HomePlaceholder() {
 		}));
 	});
 
-	if (showIntro) {
-		return (
-			<div className='w-full h-full flex items-center justify-center bg-black relative'>
-				{!isVideoLoaded && (
-					<div className='absolute inset-0 flex items-center justify-center'>
-						<div className='w-16 h-16 border-4 border-white border-t-transparent rounded-full animate-spin'></div>
-					</div>
-				)}
-				<video
-					ref={videoRef}
-					className='w-full h-full object-contain'
-					autoPlay
-					muted
-					playsInline
-					onEnded={handleVideoEnd}
-					onLoadedData={() => setIsVideoLoaded(true)}
-					onError={(e) => console.error("Video error:", e)}
-				>
-					<source src='/intro.mp4' type='video/mp4' />
-					Your browser does not support the video tag.
-				</video>
-				<button
-					onClick={handleSkipVideo}
-					className='absolute bottom-8 right-8 px-6 py-3 bg-white/90 hover:bg-white text-black font-bold rounded-full transition-all duration-300 hover:scale-105 shadow-lg cursor-pointer'
-				>
-					Ei jaksa..
-				</button>
-			</div>
-		);
-	}
+	if (showIntro || showOutro) {
+		const videoSrc = showIntro ? "/intro.mp4" : "/outro.mp4";
 
-	if (showOutro) {
 		return (
 			<div className='w-full h-full flex items-center justify-center bg-black relative'>
-				{!isVideoLoaded && (
-					<div className='absolute inset-0 flex items-center justify-center'>
-						<div className='w-16 h-16 border-4 border-white border-t-transparent rounded-full animate-spin'></div>
-					</div>
-				)}
-				<video
-					ref={videoRef}
-					className='w-full h-full object-contain'
-					autoPlay
-					muted
-					playsInline
+				{!isVideoLoaded && <VideoLoader />}
+				<VideoPlayer
+					src={videoSrc}
 					onEnded={handleVideoEnd}
 					onLoadedData={() => setIsVideoLoaded(true)}
-					onError={(e) => console.error("Video error:", e)}
-				>
-					<source src='/outro.mp4' type='video/mp4' />
-					Your browser does not support the video tag.
-				</video>
-				<button
-					onClick={handleSkipVideo}
-					className='absolute bottom-8 right-8 px-6 py-3 bg-white/90 hover:bg-white text-black font-bold rounded-full transition-all duration-300 hover:scale-105 shadow-lg cursor-pointer'
-				>
-					Aitäh!
-				</button>
+				/>
 			</div>
 		);
 	}
 
 	return (
-		<div className='w-full h-full flex items-center justify-center bg-gradient-to-br from-gray-900 to-gray-800'>
+		<div className='w-full h-full flex items-center justify-center bg-gradient-to-br from-gray-900 to-gray-800 relative'>
 			<div className='max-w-2xl w-full p-8'>
 				<h1 className='text-4xl font-bold text-white text-center mb-8'>
 					Erialad
@@ -172,6 +153,14 @@ function HomePlaceholder() {
 					))}
 				</div>
 			</div>
+
+			<button
+				onClick={handleResetProgress}
+				className='absolute bottom-8 right-8 px-4 py-2 bg-red-500 hover:bg-red-600 text-white font-semibold rounded-lg transition-all duration-300 hover:scale-105 shadow-lg cursor-pointer'
+				title='Lähtesta edusammud'
+			>
+				Lähtesta
+			</button>
 		</div>
 	);
 }
